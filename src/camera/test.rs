@@ -32,9 +32,26 @@ mod new {
         let image = Image::new(200, 100);
         let film = Film::new(2.0, 1.0, image);
 
-        let subject = Subject::new(origin, direction, orientation, film.clone());
+        let subject = Subject::new(origin, direction, orientation, film);
 
         assert_eq!(subject.direction, Vector::new(0.0, 0.0, 1.0));
         assert_eq!(subject.orientation, Vector::new(0.0, 1.0, 0.0));
+    }
+
+    #[test]
+    fn it_sets_vectors_that_span_left_to_right_and_top_to_bottom() {
+        let origin = Vector::new(1.0, 2.0, 3.0);
+        let direction = Vector::new(0.0, 0.0, 1.0);
+        let orientation = Vector::new(0.0, 1.0, 0.0);
+
+        let image = Image::new(200, 100);
+        let film = Film::new(2.0, 1.0, image);
+
+        let subject = Subject::new(origin, direction, orientation, film);
+
+        assert_eq!(subject.left_to_right, Vector::new(2.0, 0.0, 0.0));
+        assert_eq!(subject.top_to_bottom, Vector::new(0.0, -1.0, 0.0));
+    }
+}
     }
 }

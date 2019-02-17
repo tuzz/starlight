@@ -1,12 +1,12 @@
 use crate::image::Image;
 use crate::vector::Vector;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Default, PartialEq)]
 pub struct Film {
-    width: f64,
-    height: f64,
-    image: Image,
+    pub width: f64,
+    pub height: f64,
 
+    image: Image,
     pixel_width: f64,
     pixel_height: f64,
 }
