@@ -74,6 +74,18 @@ mod cross_product {
     }
 }
 
+mod division {
+    use super::*;
+
+    #[test]
+    fn it_divides_the_vectors_components_by_a_divisor() {
+        let vector = Subject::new(1.0, 2.0, 3.0);
+        let subject = vector / 4.0;
+
+        assert_eq!(subject, Subject::new(0.25, 0.5, 0.75));
+    }
+}
+
 mod length {
     use super::*;
 
@@ -82,5 +94,18 @@ mod length {
         let subject = Subject::new(1.0, 2.0, 3.0);
 
         assert_eq!(subject.length(), f64::sqrt(14.0));
+    }
+}
+
+mod normalize {
+    use super::*;
+
+    #[test]
+    fn it_divides_each_component_by_the_vectors_length() {
+        let vector = Subject::new(1.0, 2.0, 3.0);
+        let subject = vector.normalize();
+
+        let l = vector.length();
+        assert_eq!(subject, Subject::new(1.0 / l, 2.0 / l, 3.0 / l));
     }
 }

@@ -1,4 +1,4 @@
-use std::ops::{Add, Sub, Mul};
+use std::ops::{Add, Sub, Mul, Div};
 
 #[derive(Debug, Clone, Copy, Default, PartialEq)]
 pub struct Vector {
@@ -18,6 +18,10 @@ impl Vector {
         let z2 = self.z * self.z;
 
         (x2 + y2 + z2).sqrt()
+    }
+
+    pub fn normalize(&self) -> Self {
+        *self / self.length()
     }
 }
 
@@ -54,6 +58,14 @@ impl Mul for Vector {
         let z = (self.x * other.y) - (self.y * other.x);
 
         Self::new(x, y, z)
+    }
+}
+
+impl Div<f64> for Vector {
+    type Output = Self;
+
+    fn div(self, divisor: f64) -> Self::Output {
+        self * (1.0 / divisor)
     }
 }
 
