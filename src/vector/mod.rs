@@ -23,6 +23,10 @@ impl Vector {
     pub fn normalize(&self) -> Self {
         *self / self.length()
     }
+
+    pub fn lerp(&self, other: Self, t: f64) -> Self {
+        *self * (1.0 - t) + other * t
+    }
 }
 
 impl Add for Vector {

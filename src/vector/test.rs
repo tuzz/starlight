@@ -120,3 +120,17 @@ mod normalize {
         assert_eq!(subject, Subject::new(1.0 / l, 2.0 / l, 3.0 / l));
     }
 }
+
+mod lerp {
+    use super::*;
+
+    #[test]
+    fn it_linearly_interpolates_between_two_vectors() {
+        let a = Subject::new(1.0, 2.0, 3.0);
+        let b = Subject::new(4.0, 5.0, 6.0);
+
+        let subject = a.lerp(b, 0.5);
+
+        assert_eq!(subject, Subject::new(2.5, 3.5, 4.5));
+    }
+}
