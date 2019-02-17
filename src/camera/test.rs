@@ -86,7 +86,7 @@ mod trace_rays {
         let mut subject = Subject::new(origin, direction, orientation, film);
 
         subject.trace_rays(|ray| {
-            let direction = Vector::new(-1.0, 0.5, 1.0);
+            let direction = Vector::new(0.0, 0.0, 1.0);
 
             assert_eq!(ray, Ray::new(origin, direction));
 

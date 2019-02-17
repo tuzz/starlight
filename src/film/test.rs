@@ -23,10 +23,10 @@ mod pixel_ratios {
         let subject = Subject::new(2.0, 1.0, image);
 
         assert_eq!(subject.pixel_ratios(), &[
-            (0, 0, 0.0, 0.0),
-            (0, 1, 0.0, 0.5),
-            (1, 0, 1.0, 0.0),
-            (1, 1, 1.0, 0.5),
+            (0, 0, 0.25, 0.25),
+            (0, 1, 0.25, 0.75),
+            (1, 0, 0.75, 0.25),
+            (1, 1, 0.75, 0.75),
         ]);
     }
 }
@@ -36,17 +36,11 @@ mod pixel_ratio {
 
     #[test]
     fn it_returns_the_ratio_of_the_pixels_position_to_the_films_dimensions() {
-        let image = Image::new(200, 100);
+        let image = Image::new(20, 10);
         let subject = Subject::new(2.0, 1.0, image);
 
-        assert_eq!(subject.pixel_ratio(0, 0), (0.0, 0.0));
-
-        assert_eq!(subject.pixel_ratio(1, 0), (0.01, 0.0));
-        assert_eq!(subject.pixel_ratio(2, 0), (0.02, 0.0));
-
-        assert_eq!(subject.pixel_ratio(0, 1), (0.0, 0.01));
-        assert_eq!(subject.pixel_ratio(0, 2), (0.0, 0.02));
-
-        assert_eq!(subject.pixel_ratio(199, 99), (1.99, 0.99));
+        assert_eq!(subject.pixel_ratio(0, 0), (0.025, 0.05));
+        assert_eq!(subject.pixel_ratio(2, 4), (0.125, 0.45));
+        assert_eq!(subject.pixel_ratio(17, 7), (0.875, 0.75));
     }
 }
