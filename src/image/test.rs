@@ -21,3 +21,19 @@ mod new {
         assert_eq!(subject.pixels[0][0], Vector::new(0.0, 0.0, 0.0));
     }
 }
+
+mod set {
+    use super::*;
+
+    fn it_sets_the_color_of_a_pixel() {
+        let mut subject = Image::new(800, 600);
+        let color = Vector::new(0.1, 0.2, 0.3);
+
+        let x = 0;
+        let y = 1;
+
+        subject.set(x, y, color);
+
+        assert_eq!(subject.pixels[x][y], color);
+    }
+}

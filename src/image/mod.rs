@@ -1,19 +1,23 @@
 use crate::vector::Vector;
 
 struct Image {
-    width: u32,
-    height: u32,
+    width: usize,
+    height: usize,
     pixels: Vec<Vec<Vector>>,
 }
 
 impl Image {
-    fn new(width: u32, height: u32) -> Self {
+    pub fn new(width: usize, height: usize) -> Self {
         let pixels = Self::pixels(width, height);
 
         Self { width, height, pixels }
     }
 
-    fn pixels(width: u32, height: u32) -> Vec<Vec<Vector>> {
+    pub fn set(&mut self, x: usize, y: usize, color: Vector) {
+        self.pixels[y][x] = color;
+    }
+
+    fn pixels(width: usize, height: usize) -> Vec<Vec<Vector>> {
         (0..height).map(|_| {
             (0..width).map(|_| {
 
