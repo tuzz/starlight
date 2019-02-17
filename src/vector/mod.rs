@@ -1,4 +1,4 @@
-use std::ops::Add;
+use std::ops::{Add, Sub};
 
 #[derive(Debug, Clone, Copy, Default, PartialEq)]
 pub struct Vector {
@@ -18,6 +18,14 @@ impl Add for Vector {
 
     fn add(self, other: Self) -> Self::Output {
         Self::new(self.x + other.x, self.y + other.y, self.z + other.z)
+    }
+}
+
+impl Sub for Vector {
+    type Output = Self;
+
+    fn sub(self, other: Self) -> Self::Output {
+        Self::new(self.x - other.x, self.y - other.y, self.z - other.z)
     }
 }
 

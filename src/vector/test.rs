@@ -28,3 +28,17 @@ mod addition {
         assert_eq!(subject, Subject::new(5.0, 7.0, 9.0));
     }
 }
+
+mod subtraction {
+    use super::*;
+
+    #[test]
+    fn it_subtracts_the_vectors_components() {
+        let a = Subject::new(5.0, 5.0, 5.0);
+        let b = Subject::new(1.0, 2.0, 3.0);
+
+        let subject = a - b;
+
+        assert_eq!(subject, Subject::new(4.0, 3.0, 2.0));
+    }
+}
