@@ -37,5 +37,17 @@ impl Mul<f64> for Vector {
     }
 }
 
+impl Mul for Vector {
+    type Output = Self;
+
+    fn mul(self, other: Self) -> Self::Output {
+        let x = (self.y * other.z) - (self.z * other.y);
+        let y = (self.z * other.x) - (self.x * other.z);
+        let z = (self.x * other.y) - (self.y * other.x);
+
+        Self::new(x, y, z)
+    }
+}
+
 #[cfg(test)]
 mod test;

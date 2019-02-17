@@ -54,3 +54,22 @@ mod scaling {
         assert_eq!(subject, Subject::new(4.0, 8.0, 12.0));
     }
 }
+
+mod cross_product {
+    use super::*;
+
+    #[test]
+    fn it_calculates_the_cross_product_of_two_vectors() {
+        // Example from:
+        // https://www.symbolab.com/solver/vector-cross-product-calculator
+
+        let a = Subject::new(1.0, 2.0, 3.0);
+        let b = Subject::new(1.0, 5.0, 7.0);
+
+        let subject = a * b;
+
+        assert_eq!(subject.x, -1.0);
+        assert_eq!(subject.y, -4.0);
+        assert_eq!(subject.z, 3.0);
+    }
+}
