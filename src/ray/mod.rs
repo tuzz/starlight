@@ -1,12 +1,13 @@
 use crate::vector::Vector;
 
-struct Ray {
-    origin: Vector,
-    direction: Vector,
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Ray {
+    pub origin: Vector,
+    pub direction: Vector,
 }
 
 impl Ray {
-    fn new(origin: Vector, direction: Vector) -> Self {
+    pub fn new(origin: Vector, direction: Vector) -> Self {
         Self { origin, direction }
     }
 }

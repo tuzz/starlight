@@ -53,5 +53,23 @@ mod new {
         assert_eq!(subject.top_to_bottom, Vector::new(0.0, -1.0, 0.0));
     }
 }
+
+mod generate_ray {
+    use super::*;
+
+    #[test]
+    fn it_generates_a_ray_that_travels_through_the_film_at_the_given_ratio() {
+        let origin = Vector::new(1.0, 2.0, 3.0);
+        let direction = Vector::new(0.0, 0.0, 1.0);
+        let orientation = Vector::new(0.0, 1.0, 0.0);
+
+        let image = Image::new(200, 100);
+        let film = Film::new(2.0, 1.0, image);
+
+        let subject = Subject::new(origin, direction, orientation, film);
+        let ray = subject.generate_ray(0.3, 0.2);
+
+        assert_eq!(ray.origin, origin);
+        assert_eq!(ray.direction, Vector::new(-0.4, 0.3, 1.0));
     }
 }
