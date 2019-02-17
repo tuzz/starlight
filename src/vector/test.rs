@@ -134,3 +134,15 @@ mod lerp {
         assert_eq!(subject, Subject::new(2.5, 3.5, 4.5));
     }
 }
+
+mod dot {
+    use super::*;
+
+    #[test]
+    fn it_returns_the_dot_product_of_two_vectors() {
+        let a = Subject::new(1.0, 2.0, 3.0);
+        let b = Subject::new(4.0, 5.0, 6.0);
+
+        assert_eq!(a.dot(b), 32.0);
+    }
+}

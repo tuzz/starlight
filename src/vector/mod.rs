@@ -27,6 +27,14 @@ impl Vector {
     pub fn lerp(&self, other: Self, t: f64) -> Self {
         *self * (1.0 - t) + other * t
     }
+
+    pub fn dot(&self, other: Self) -> f64 {
+        let x = self.x * other.x;
+        let y = self.y * other.y;
+        let z = self.z * other.z;
+
+        x + y + z
+    }
 }
 
 impl Add for Vector {
