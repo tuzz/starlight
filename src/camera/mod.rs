@@ -10,6 +10,9 @@ struct Camera {
 
 impl Camera {
     fn new(origin: Vector, direction: Vector, orientation: Vector, film: Film) -> Self {
+        let direction = direction.normalize();
+        let orientation = orientation.normalize();
+
         Self { origin, direction, orientation, film }
     }
 }

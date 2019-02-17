@@ -22,4 +22,19 @@ mod new {
         assert_eq!(subject.orientation, orientation);
         assert_eq!(subject.film, film);
     }
+
+    #[test]
+    fn it_normalizes_the_direction_and_orientation_vectors() {
+        let origin = Vector::default();
+        let direction = Vector::new(0.0, 0.0, 2.0);
+        let orientation = Vector::new(0.0, 2.0, 0.0);
+
+        let image = Image::new(200, 100);
+        let film = Film::new(2.0, 1.0, image);
+
+        let subject = Subject::new(origin, direction, orientation, film.clone());
+
+        assert_eq!(subject.direction, Vector::new(0.0, 0.0, 1.0));
+        assert_eq!(subject.orientation, Vector::new(0.0, 1.0, 0.0));
+    }
 }
