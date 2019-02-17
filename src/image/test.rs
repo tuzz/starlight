@@ -27,13 +27,29 @@ mod set {
 
     fn it_sets_the_color_of_a_pixel() {
         let mut subject = Image::new(800, 600);
-        let color = Vector::new(0.1, 0.2, 0.3);
+        let purple = Vector::new(0.5, 0.0, 0.5);
 
         let x = 0;
         let y = 1;
 
-        subject.set(x, y, color);
+        subject.set(x, y, purple);
 
-        assert_eq!(subject.pixels[x][y], color);
+        assert_eq!(subject.pixels[x][y], purple);
+    }
+}
+
+mod write {
+    use super::*;
+
+    #[test]
+    fn it_writes_the_image_to_a_file() {
+        let mut subject = Image::new(500, 500);
+        let purple = Vector::new(0.5, 0.0, 0.5);
+
+        for i in 0..500 {
+            subject.set(i, i, purple);
+        }
+
+        subject.write("test-image.png");
     }
 }
