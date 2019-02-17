@@ -19,6 +19,10 @@ impl Image {
         Self { width, height, pixels }
     }
 
+    pub fn get(&mut self, x: usize, y: usize) -> Vector {
+        self.pixels[y][x]
+    }
+
     pub fn set(&mut self, x: usize, y: usize, color: Vector) {
         self.pixels[y][x] = color;
     }
