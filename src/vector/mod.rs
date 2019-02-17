@@ -1,4 +1,4 @@
-use std::ops::{Add, Sub};
+use std::ops::{Add, Sub, Mul};
 
 #[derive(Debug, Clone, Copy, Default, PartialEq)]
 pub struct Vector {
@@ -26,6 +26,14 @@ impl Sub for Vector {
 
     fn sub(self, other: Self) -> Self::Output {
         Self::new(self.x - other.x, self.y - other.y, self.z - other.z)
+    }
+}
+
+impl Mul<f64> for Vector {
+    type Output = Self;
+
+    fn mul(self, scalar: f64) -> Self::Output {
+        Self::new(self.x * scalar, self.y * scalar, self.z * scalar)
     }
 }
 

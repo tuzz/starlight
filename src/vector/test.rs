@@ -42,3 +42,15 @@ mod subtraction {
         assert_eq!(subject, Subject::new(4.0, 3.0, 2.0));
     }
 }
+
+mod scaling {
+    use super::*;
+
+    #[test]
+    fn it_multiplies_the_vectors_components_by_a_scalar() {
+        let vector = Subject::new(1.0, 2.0, 3.0);
+        let subject = vector * 4.0;
+
+        assert_eq!(subject, Subject::new(4.0, 8.0, 12.0));
+    }
+}
