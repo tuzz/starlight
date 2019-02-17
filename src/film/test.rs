@@ -14,32 +14,20 @@ mod new {
     }
 }
 
-mod map_pixels {
+mod pixel_ratios {
     use super::*;
 
     #[test]
-    fn it_sets_the_color_of_each_pixel_from_the_closures_return_value() {
-        let image = Image::new(200, 100);
-        let mut subject = Subject::new(2.0, 1.0, image);
-        let purple = Vector::new(0.5, 0.0, 0.5);
-
-        subject.map_pixels(|_| purple);
-
-        assert_eq!(subject.image.get(0, 0), purple);
-        assert_eq!(subject.image.get(199, 99), purple);
-    }
-
-    #[test]
-    fn it_calls_the_closure_with_each_pixels_x_and_y_ratios() {
-        let image = Image::new(1, 1);
+    fn it_returns_an_array_of_all_pixels_with_their_x_y_ratios() {
+        let image = Image::new(2, 2);
         let mut subject = Subject::new(2.0, 1.0, image);
 
-        subject.map_pixels(|(x_ratio, y_ratio)| {
-            assert_eq!(x_ratio, 0.0);
-            assert_eq!(y_ratio, 0.0);
-
-            Vector::default()
-        });
+        assert_eq!(subject.pixel_ratios(), &[
+            (0, 0, 0.0, 0.0),
+            (0, 1, 0.0, 0.5),
+            (1, 0, 1.0, 0.0),
+            (1, 1, 1.0, 0.5),
+        ]);
     }
 }
 

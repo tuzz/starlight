@@ -1,5 +1,4 @@
 use crate::image::Image;
-use crate::vector::Vector;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct Film {
@@ -19,16 +18,14 @@ impl Film {
         Self { width, height, image, pixel_width, pixel_height }
     }
 
-    pub fn map_pixels<F: Fn((f64, f64)) -> Vector>(&mut self, callback: F) {
-        for x in 0..self.image.width {
-            for y in 0..self.image.height {
+    pub fn pixel_ratios(&self) -> Vec<(usize, usize, f64, f64)> {
+        (0..self.image.width).flat_map(|x| {
+            (0..self.image.height).map(move |y| {
+                let (x_ratio, y_ratio) = self.pixel_ratio(x, y);
 
-                let ratio = self.pixel_ratio(x, y);
-                let color = callback(ratio);
-
-                self.image.set(x, y, color);
-            }
-        }
+                (x, y, x_ratio, y_ratio)
+            })
+        }).collect()
     }
 
     fn pixel_ratio(&self, x: usize, y: usize) -> (f64, f64) {
