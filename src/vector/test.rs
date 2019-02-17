@@ -73,3 +73,14 @@ mod cross_product {
         assert_eq!(subject.z, 3.0);
     }
 }
+
+mod length {
+    use super::*;
+
+    #[test]
+    fn it_returns_the_length_of_the_vector() {
+        let subject = Subject::new(1.0, 2.0, 3.0);
+
+        assert_eq!(subject.length(), f64::sqrt(14.0));
+    }
+}

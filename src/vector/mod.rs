@@ -11,6 +11,14 @@ impl Vector {
     pub fn new(x: f64, y: f64, z: f64) -> Self {
         Self { x, y, z }
     }
+
+    pub fn length(&self) -> f64 {
+        let x2 = self.x * self.x;
+        let y2 = self.y * self.y;
+        let z2 = self.z * self.z;
+
+        (x2 + y2 + z2).sqrt()
+    }
 }
 
 impl Add for Vector {
