@@ -86,6 +86,17 @@ mod division {
     }
 }
 
+mod negation {
+    use super::*;
+
+    #[test]
+    fn it_negates_the_vectors_components() {
+        let subject = Subject::new(1.0, 2.0, 3.0);
+
+        assert_eq!(-subject, Subject::new(-1.0, -2.0, -3.0));
+    }
+}
+
 mod length {
     use super::*;
 
