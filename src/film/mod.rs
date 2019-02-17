@@ -1,13 +1,14 @@
 use crate::image::Image;
 
-struct Film {
+#[derive(Debug, Clone, PartialEq)]
+pub struct Film {
     width: f64,
     height: f64,
     image: Image,
 }
 
 impl Film {
-    fn new(width: f64, height: f64, image: Image) -> Self {
+    pub fn new(width: f64, height: f64, image: Image) -> Self {
         Self { width, height, image }
     }
 }
