@@ -54,6 +54,47 @@ mod new {
     }
 }
 
+mod trace_rays {
+    use super::*;
+
+    #[test]
+    fn it_sets_the_color_of_each_pixel_from_the_closures_return_value() {
+        let origin = Vector::new(1.0, 2.0, 3.0);
+        let direction = Vector::new(0.0, 0.0, 1.0);
+        let orientation = Vector::new(0.0, 1.0, 0.0);
+
+        let image = Image::new(1, 1);
+        let film = Film::new(2.0, 1.0, image);
+
+        let mut subject = Subject::new(origin, direction, orientation, film);
+        let purple = Vector::new(0.5, 0.0, 0.5);
+
+        subject.trace_rays(|_| purple);
+
+        assert_eq!(subject.film.get(0, 0), purple);
+    }
+
+    #[test]
+    fn it_calls_the_closure_with_a_ray_for_each_pixel() {
+        let origin = Vector::new(1.0, 2.0, 3.0);
+        let direction = Vector::new(0.0, 0.0, 1.0);
+        let orientation = Vector::new(0.0, 1.0, 0.0);
+
+        let image = Image::new(1, 1);
+        let film = Film::new(2.0, 1.0, image);
+
+        let mut subject = Subject::new(origin, direction, orientation, film);
+
+        subject.trace_rays(|ray| {
+            let direction = Vector::new(-1.0, 0.5, 1.0);
+
+            assert_eq!(ray, Ray::new(origin, direction));
+
+            Vector::default()
+        });
+    }
+}
+
 mod generate_ray {
     use super::*;
 

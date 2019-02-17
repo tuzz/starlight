@@ -21,6 +21,15 @@ impl Camera {
         Self { origin, direction, orientation, film, ..Self::default() }.set_spans()
     }
 
+    fn trace_rays<F: Fn(Ray) -> Vector>(&mut self, callback: F) {
+        for (x, y, x_ratio, y_ratio) in self.film.pixel_ratios() {
+            let ray = self.generate_ray(x_ratio, y_ratio);
+            let color = callback(ray);
+
+            self.film.set(x, y, color);
+        }
+    }
+
     fn generate_ray(&self, x_ratio: f64, y_ratio: f64) -> Ray {
         let x_offset = x_ratio - 0.5;
         let y_offset = y_ratio - 0.5;

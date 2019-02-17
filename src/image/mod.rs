@@ -19,7 +19,7 @@ impl Image {
         Self { width, height, pixels }
     }
 
-    pub fn get(&mut self, x: usize, y: usize) -> Vector {
+    pub fn get(&self, x: usize, y: usize) -> Vector {
         self.pixels[y][x]
     }
 

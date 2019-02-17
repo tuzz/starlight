@@ -20,7 +20,7 @@ mod pixel_ratios {
     #[test]
     fn it_returns_an_array_of_all_pixels_with_their_x_y_ratios() {
         let image = Image::new(2, 2);
-        let mut subject = Subject::new(2.0, 1.0, image);
+        let subject = Subject::new(2.0, 1.0, image);
 
         assert_eq!(subject.pixel_ratios(), &[
             (0, 0, 0.0, 0.0),
