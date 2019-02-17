@@ -4,7 +4,8 @@ use std::iter::once;
 use png::{Encoder, HasParameters};
 use crate::vector::Vector;
 
-struct Image {
+#[derive(Debug, Clone, PartialEq)]
+pub struct Image {
     width: usize,
     height: usize,
     pixels: Vec<Vec<Vector>>,
