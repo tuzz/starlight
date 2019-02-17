@@ -1,25 +1,15 @@
 use crate::image::Image;
-use crate::vector::Vector;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct Film {
     pub width: f64,
     pub height: f64,
-
-    image: Image,
+    pub image: Image,
 }
 
 impl Film {
     pub fn new(width: f64, height: f64, image: Image) -> Self {
         Self { width, height, image }
-    }
-
-    pub fn get(&self, x: usize, y: usize) -> Vector {
-        self.image.get(x, y)
-    }
-
-    pub fn set(&mut self, x: usize, y: usize, color: Vector) {
-        self.image.set(x, y, color);
     }
 
     pub fn pixel_ratios(&self) -> Vec<(usize, usize, f64, f64)> {

@@ -3,7 +3,7 @@ use crate::ray::Ray;
 use crate::film::Film;
 
 #[derive(Default)]
-struct Camera {
+pub struct Camera {
     origin: Vector,
     direction: Vector,
     orientation: Vector,
@@ -14,20 +14,24 @@ struct Camera {
 }
 
 impl Camera {
-    fn new(origin: Vector, direction: Vector, orientation: Vector, film: Film) -> Self {
+    pub fn new(origin: Vector, direction: Vector, orientation: Vector, film: Film) -> Self {
         let direction = direction.normalize();
         let orientation = orientation.normalize();
 
         Self { origin, direction, orientation, film, ..Self::default() }.set_spans()
     }
 
-    fn trace_rays<F: Fn(Ray) -> Vector>(&mut self, callback: F) {
+    pub fn trace_rays<F: Fn(Ray) -> Vector>(&mut self, callback: F) {
         for (x, y, x_ratio, y_ratio) in self.film.pixel_ratios() {
             let ray = self.generate_ray(x_ratio, y_ratio);
             let color = callback(ray);
 
-            self.film.set(x, y, color);
+            self.film.image.set(x, y, color);
         }
+    }
+
+    pub fn take_photograph(&self, filename: &str) {
+        self.film.image.write(filename);
     }
 
     fn generate_ray(&self, x_ratio: f64, y_ratio: f64) -> Ray {

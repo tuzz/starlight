@@ -71,7 +71,7 @@ mod trace_rays {
 
         subject.trace_rays(|_| purple);
 
-        assert_eq!(subject.film.get(0, 0), purple);
+        assert_eq!(subject.film.image.get(0, 0), purple);
     }
 
     #[test]
