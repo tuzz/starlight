@@ -6,6 +6,7 @@ mod camera;
 mod sphere;
 mod interaction;
 mod light;
+mod material;
 
 use vector::Vector;
 use image::Image;
