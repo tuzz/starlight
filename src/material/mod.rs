@@ -1,11 +1,12 @@
 use crate::vector::Vector;
 
-struct Material {
-    color: Vector,
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Material {
+    pub color: Vector,
 }
 
 impl Material {
-    fn new(color: Vector) -> Self {
+    pub fn new(color: Vector) -> Self {
         Self { color }
     }
 }

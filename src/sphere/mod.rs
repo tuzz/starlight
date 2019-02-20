@@ -2,15 +2,15 @@ use crate::vector::Vector;
 use crate::ray::Ray;
 use crate::interaction::Interaction;
 
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Sphere {
     pub origin: Vector,
     pub radius: f64,
-    pub color: Vector,
 }
 
 impl Sphere {
-    pub fn new(origin: Vector, radius: f64, color: Vector) -> Self {
-        Self { origin, radius, color }
+    pub fn new(origin: Vector, radius: f64) -> Self {
+        Self { origin, radius }
     }
 
     pub fn intersection(&self, ray: Ray) -> Option<Interaction> {
