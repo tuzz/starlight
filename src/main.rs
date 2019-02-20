@@ -36,10 +36,8 @@ fn main() {
     let scene = Scene::new(vec![primitive], vec![light]);
 
     camera.trace_rays(|ray| {
-        for primitive in &scene.primitives {
-            if let Some(interaction) = primitive.intersection(ray) {
-                return primitive.material.color * interaction.ray_t;
-            }
+        if let Some((interaction, primitive)) = scene.intersection(ray) {
+            return primitive.material.color * interaction.ray_t;
         }
 
         Vector::new(0.2, 0.2, 0.2)
