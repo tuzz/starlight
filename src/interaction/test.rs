@@ -24,3 +24,19 @@ mod new {
         assert_eq!(subject.normal, Vector::new(1.0, 0.0, 0.0));
     }
 }
+
+mod ord {
+    use super::*;
+
+    #[test]
+    fn it_orders_interactions_by_their_ray_t_parameters() {
+        let a = Subject::new(2.0, Vector::new(1.0, 0.0, 0.0));
+        let b = Subject::new(1.0, Vector::new(1.0, 0.0, 0.0));
+        let c = Subject::new(3.0, Vector::new(1.0, 0.0, 0.0));
+
+        let mut vec = vec![a, b, c];
+        vec.sort();
+
+        assert_eq!(vec, &[b, a, c]);
+    }
+}
