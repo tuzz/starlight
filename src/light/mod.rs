@@ -1,12 +1,13 @@
 use crate::vector::Vector;
 
-struct Light {
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Light {
     origin: Vector,
     power: f64,
 }
 
 impl Light {
-    fn new(origin: Vector, power: f64) -> Self {
+    pub fn new(origin: Vector, power: f64) -> Self {
         Self { origin, power }
     }
 }

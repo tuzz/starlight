@@ -8,6 +8,7 @@ mod interaction;
 mod light;
 mod material;
 mod primitive;
+mod scene;
 
 use vector::Vector;
 use image::Image;

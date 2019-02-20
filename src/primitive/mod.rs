@@ -3,6 +3,7 @@ use crate::material::Material;
 use crate::interaction::Interaction;
 use crate::ray::Ray;
 
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Primitive {
     pub shape: Sphere, // TODO: add a Shape trait
     pub material: Material,
