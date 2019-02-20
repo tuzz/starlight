@@ -1,13 +1,13 @@
 use crate::primitive::Primitive;
 use crate::light::Light;
 
-struct Scene {
-    primitives: Vec<Primitive>,
-    lights: Vec<Light>,
+pub struct Scene {
+    pub primitives: Vec<Primitive>,
+    pub lights: Vec<Light>,
 }
 
 impl Scene {
-    fn new(primitives: Vec<Primitive>, lights: Vec<Light>) -> Self {
+    pub fn new(primitives: Vec<Primitive>, lights: Vec<Light>) -> Self {
         Self { primitives, lights }
     }
 }
