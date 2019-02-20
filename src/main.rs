@@ -5,6 +5,7 @@ mod film;
 mod camera;
 mod sphere;
 mod interaction;
+mod light;
 
 use vector::Vector;
 use image::Image;
