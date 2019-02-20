@@ -10,6 +10,10 @@ impl Ray {
     pub fn new(origin: Vector, direction: Vector) -> Self {
         Self { origin, direction }
     }
+
+    pub fn at(&self, t: f64) -> Vector {
+        self.origin + self.direction * t
+    }
 }
 
 #[cfg(test)]
