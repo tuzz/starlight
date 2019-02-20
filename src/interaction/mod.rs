@@ -8,6 +8,8 @@ pub struct Interaction {
 
 impl Interaction {
     pub fn new(ray_t: f64, normal: Vector) -> Self {
+        let normal = normal.normalize();
+
         Self { ray_t, normal }
     }
 }
