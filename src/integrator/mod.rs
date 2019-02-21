@@ -36,9 +36,13 @@ impl Integrator {
             // Build a ray from the point of intersection to the light.
             let shadow_ray = Ray::new(interaction.origin, incident);
 
-            // If the light is occluded, don't add its radiance.
-            if let Some(_) = scene.intersection(shadow_ray) {
-                return 0.0;
+            // If the shadow ray intersects a primitive...
+            if let Some((i, _)) = scene.intersection(shadow_ray) {
+
+                // ... Don't add its radiance if the primitive occludes the light.
+                if i.ray_t < (light.origin - shadow_ray.origin).length() {
+                    return 0.0;
+                }
             }
 
             // Calculate the proportion of light falling on the tilted surface.

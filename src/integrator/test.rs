@@ -20,13 +20,22 @@ fn camera() -> Camera {
 
 fn scene() -> Scene {
     let yellow = Vector::new(1.0, 1.0, 0.0);
+
+    // A large sphere in the center.
     let sphere1 = Sphere::new(Vector::new(0.0, 0.0, 3.0), 1.0);
     let primitive1 = Primitive::new(sphere1, Material::new(yellow));
+
+    // A smaller sphere to the right.
     let sphere2 = Sphere::new(Vector::new(0.5, 0.5, 2.0), 0.1);
     let primitive2 = Primitive::new(sphere2, Material::new(yellow));
-    let light = Light::new(Vector::new(1.0, 1.0, 1.0), 3.0);
 
-    Scene::new(vec![primitive1, primitive2], vec![light])
+    // This sphere is behind the light.
+    let sphere3 = Sphere::new(Vector::new(1.5, 1.0, 1.0), 0.4);
+    let primitive3 = Primitive::new(sphere3, Material::new(yellow));
+
+    let light = Light::new(Vector::new(1.0, 1.0, 1.0), 2.0);
+
+    Scene::new(vec![primitive1, primitive2, primitive3], vec![light])
 }
 
 mod new {
@@ -65,8 +74,8 @@ mod li {
 
         let color = Subject::li(ray, &scene);
 
-        assert!(color.x > 0.5 && color.x < 0.6);
-        assert!(color.y > 0.5 && color.y < 0.6);
+        assert!(color.x > 0.3 && color.x < 0.4);
+        assert!(color.y > 0.3 && color.y < 0.4);
 
         assert_eq!(color.z, 0.0);
     }
@@ -81,5 +90,20 @@ mod li {
         let color = Subject::li(ray, &scene);
 
         assert_eq!(color, Vector::default());
+    }
+
+    #[test]
+    fn it_does_not_cast_shadows_from_primitives_behind_the_light() {
+        let subject = Subject::new(camera());
+
+        let scene = scene();
+        let ray = Ray::new(Vector::default(), Vector::new(-0.1, 0.0, 1.0));
+
+        let color = Subject::li(ray, &scene);
+
+        assert!(color.x > 0.2 && color.x < 0.3);
+        assert!(color.x > 0.2 && color.x < 0.3);
+
+        assert_eq!(color.z, 0.0);
     }
 }
