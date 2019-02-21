@@ -8,6 +8,8 @@ pub struct Sphere {
     pub radius: f64,
 }
 
+const EPSILON: f64 = 0.0000000001;
+
 impl Sphere {
     pub fn new(origin: Vector, radius: f64) -> Self {
         Self { origin, radius }
@@ -36,8 +38,12 @@ impl Sphere {
         let t0 = (-b - sqrt) / (a * 2.0);
         let t1 = (-b + sqrt) / (a * 2.0);
 
+        if t0 <= EPSILON && t1 <= EPSILON {
+            return None;
+        }
+
         // The intersection is the smallest positive solution:
-        let ray_t = if t0 > 0.0 { t0 } else { t1 };
+        let ray_t = if t0 > EPSILON { t0 } else { t1 };
         let origin = ray.at(ray_t);
         let normal = origin - self.origin;
 
