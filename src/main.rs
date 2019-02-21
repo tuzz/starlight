@@ -9,6 +9,7 @@ mod light;
 mod material;
 mod primitive;
 mod scene;
+mod integrator;
 
 use vector::Vector;
 use image::Image;
@@ -19,6 +20,7 @@ use material::Material;
 use primitive::Primitive;
 use light::Light;
 use scene::Scene;
+use integrator::Integrator;
 
 fn main() {
     let origin = Vector::new(0.0, 0.0, 0.0);

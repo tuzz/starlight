@@ -2,7 +2,7 @@ use crate::vector::Vector;
 use crate::ray::Ray;
 use crate::film::Film;
 
-#[derive(Default)]
+#[derive(Debug, Clone, Default, PartialEq)]
 pub struct Camera {
     origin: Vector,
     direction: Vector,
