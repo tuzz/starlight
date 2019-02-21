@@ -4,14 +4,15 @@ use crate::vector::Vector;
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Interaction {
     pub ray_t: f64,
+    pub origin: Vector,
     pub normal: Vector,
 }
 
 impl Interaction {
-    pub fn new(ray_t: f64, normal: Vector) -> Self {
+    pub fn new(ray_t: f64, origin: Vector, normal: Vector) -> Self {
         let normal = normal.normalize();
 
-        Self { ray_t, normal }
+        Self { ray_t, origin, normal }
     }
 }
 

@@ -38,9 +38,10 @@ impl Sphere {
 
         // The intersection is the smallest positive solution:
         let ray_t = if t0 > 0.0 { t0 } else { t1 };
-        let normal = ray.at(ray_t) - self.origin;
+        let origin = ray.at(ray_t);
+        let normal = origin - self.origin;
 
-        Some(Interaction::new(ray_t, normal))
+        Some(Interaction::new(ray_t, origin, normal))
     }
 }
 
