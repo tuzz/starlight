@@ -60,7 +60,7 @@ mod li {
         let scene = scene();
         let ray = Ray::new(Vector::default(), Vector::new(1.0, 0.0, 0.0));
 
-        let color = Subject::li(ray, &scene);
+        let color = Subject::li(ray, &scene, 0);
 
         assert_eq!(color, Vector::new(0.2, 0.2, 0.2));
     }
@@ -72,7 +72,7 @@ mod li {
         let scene = scene();
         let ray = Ray::new(Vector::default(), Vector::new(0.0, 0.0, 1.0));
 
-        let color = Subject::li(ray, &scene);
+        let color = Subject::li(ray, &scene, 0);
 
         assert!(color.x > 0.3 && color.x < 0.4);
         assert!(color.y > 0.3 && color.y < 0.4);
@@ -87,7 +87,7 @@ mod li {
         let scene = scene();
         let ray = Ray::new(Vector::default(), Vector::new(0.2, 0.2, 1.0));
 
-        let color = Subject::li(ray, &scene);
+        let color = Subject::li(ray, &scene, 0);
 
         assert_eq!(color, Vector::default());
     }
@@ -99,7 +99,7 @@ mod li {
         let scene = scene();
         let ray = Ray::new(Vector::default(), Vector::new(-0.1, 0.0, 1.0));
 
-        let color = Subject::li(ray, &scene);
+        let color = Subject::li(ray, &scene, 0);
 
         assert!(color.x > 0.2 && color.x < 0.3);
         assert!(color.x > 0.2 && color.x < 0.3);

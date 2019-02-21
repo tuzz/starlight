@@ -13,17 +13,21 @@ impl Integrator {
     }
 
     pub fn render(&mut self, scene: Scene) {
-        self.camera.trace_rays(|ray| Self::li(ray, &scene));
+        self.camera.trace_rays(|ray| Self::li(ray, &scene, 0));
 
         self.camera.take_photograph("render.png");
     }
 
-    fn li(ray: Ray, scene: &Scene) -> Vector {
+    fn li(ray: Ray, scene: &Scene, depth: u32) -> Vector {
         let intersection = scene.intersection(ray);
 
-        // If the ray doesn't intersect, set the background to gray.
+        // If the ray doesn't intersect, set a background based on the y param.
         if intersection.is_none() {
-            return Vector::new(0.2, 0.2, 0.2);
+            let y = 0.7 - ray.direction.y.abs();
+            let mut x = ray.direction.x / 2.0;
+            if x < y { x = y }
+
+            return Vector::new(x, x, y);
         }
 
         // Get details of the intersection, e.g. surface normal, primitive
@@ -51,7 +55,21 @@ impl Integrator {
             radiance * cosine
         }).sum::<f64>();
 
-        primitive.material.color * total_radiance
+        let reflectance = primitive.material.reflectance;
+
+        let reflection_color = match reflectance > 0.0 || depth >= 100 {
+            false => Vector::default(),
+            true => {
+                let cosine = ray.direction.dot(interaction.normal);
+                let angle = ray.direction - interaction.normal * cosine * 2.0;
+
+                let reflection_ray = Ray::new(interaction.origin, angle);
+
+                Self::li(reflection_ray, scene, depth + 1) * reflectance
+            },
+        };
+
+        (primitive.material.color + reflection_color) * total_radiance
     }
 }
 
