@@ -24,10 +24,10 @@ impl Integrator {
         // If the ray doesn't intersect, set a background based on the y param.
         if intersection.is_none() {
             let y = 0.7 - ray.direction.y.abs();
-            let mut x = ray.direction.x / 2.0;
+            let mut x = -ray.direction.x / 2.0;
             if x < y { x = y }
 
-            return Vector::new(x, x, y);
+            return Vector::new(y, y, x);
         }
 
         // Get details of the intersection, e.g. surface normal, primitive
