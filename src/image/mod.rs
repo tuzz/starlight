@@ -51,10 +51,18 @@ impl Image {
     fn bytes(&self) -> Vec<u8> {
         self.pixels.iter().flat_map(|row| {
             row.iter().flat_map(|color| {
-                once(color.x).chain(once(color.y)).chain(once(color.z))
-                    .map(|channel| (channel * 255.0).round() as u8)
+                once(Self::byte(color.x))
+                    .chain(once(Self::byte(color.y)))
+                    .chain(once(Self::byte(color.z)))
             })
         }).collect()
+    }
+
+    fn byte(mut channel: f64) -> u8 {
+        if channel > 1.0 { channel = 1.0 }
+        if channel < 0.0 { channel = 0.0 }
+
+        (channel * 255.0).round() as u8
     }
 }
 
